@@ -70,6 +70,10 @@ namespace eval ::PBCTools:: {
 		set compoundtype "connected"
 		set compoundseltext "index %s"
 	    }
+	    "all" {
+		set compoundtype "all"
+		set compoundseltext "index %s"
+	    }
 	    default {
 		vmdcon -err "pbcjoin: unknown compound type $compoundtype"
 		vmdcon -err "pbcjoin: syntax: pbc join <compound> \[<options> ...\]"
@@ -179,6 +183,10 @@ namespace eval ::PBCTools:: {
 		    foreach connpids [get_connected [$sel getbonds]] {
 			lappend compoundlist "index $connpids"
 		    }
+		}
+		"all" {
+		    set indices [$sel list]
+			lappend compoundlist "index $indices"
 		}
 	    }
 	    $sel delete
